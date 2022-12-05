@@ -1,0 +1,9 @@
+[
+    {
+        "model": "WhatsYourFixApi.comments",
+        "pk": 1,
+        "fields": {
+            "body": "this is a tester comment"
+        }
+    }
+]

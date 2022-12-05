@@ -1,0 +1,23 @@
+[
+    {
+        "model": "WhatsYourFixApi.hobbies",
+        "pk": 1,
+        "fields": {
+            "label": "Crocheting"
+        }
+    },
+    {
+        "model": "WhatsYourFixApi.hobbies",
+        "pk": 2,
+        "fields": {
+            "label": "Horseback Riding"
+        }
+    },
+    {
+        "model": "WhatsYourFixApi.hobbies",
+        "pk": 3,
+        "fields": {
+            "label": "Birdwatching"
+        }
+    }
+]

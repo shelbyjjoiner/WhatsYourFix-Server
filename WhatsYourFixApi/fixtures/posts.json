@@ -1,0 +1,13 @@
+[
+    {
+        "model": "WhatsYourFixApi.posts",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "hobbies": 1,
+            "content": "test",
+            "image": "",
+            "item": "optional"
+        }
+    }
+]
