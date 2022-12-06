@@ -3,6 +3,8 @@
         "model": "WhatsYourFixApi.comments",
         "pk": 1,
         "fields": {
+            "user": 1,
+            "post": 1,
             "body": "this is a tester comment"
         }
     }

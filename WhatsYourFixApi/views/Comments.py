@@ -14,12 +14,12 @@ class CommentView(ViewSet):
 
     def create(self, request):
 
-        author = NeuroUser.objects.get(user=request.auth.user)
-        post = Posts.object.get(pk=request.data[postId])
+        user = NeuroUser.objects.get(user=request.auth.user)
+        post = Posts.objects.get(pk=request.data["post"])
         comment = Comments.objects.create(
-            author = author, 
+            user_id = user, 
             post = post,
-            content = request.data["content"]
+            body = request.data["body"],
             
         )
 
@@ -34,4 +34,4 @@ class CommentView(ViewSet):
 class CommentSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Comments
-        fields = ('id', 'body')
+        fields = ('id', 'user', 'post', 'body')

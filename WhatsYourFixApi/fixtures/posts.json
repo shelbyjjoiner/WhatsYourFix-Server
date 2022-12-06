@@ -5,7 +5,7 @@
         "fields": {
             "user": 1,
             "hobbies": 1,
-            "content": "test",
+            "body": "test",
             "image": "",
             "item": "optional"
         }

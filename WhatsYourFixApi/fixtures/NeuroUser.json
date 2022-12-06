@@ -1,11 +1,10 @@
 [
     {
         "model": "WhatsYourFixApi.NeuroUser",
-        "pk": "1",
+        "pk": 1,
         "fields": {
-            "user": "1",
-            "bio": "This is a tester",
-            "hobby": "1"
+            "user": 1,
+            "bio": "This is a tester"
         }
     }
 ]
