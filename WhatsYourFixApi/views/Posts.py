@@ -12,12 +12,12 @@ class PostView(ViewSet):
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def create(self, pk, request): 
+    def create(self, request): 
 
         new_post = Posts.objects.create(
             user = NeuroUser.objects.get(user=request.auth.user),
             hobbies =Hobbies.objects.get(pk=request.data["hobbies"]),
-            content = request.data["content"],
+            body = request.data["body"],
             image = request.data["image"],
             item = request.data["item"]
         )
@@ -47,7 +47,7 @@ class PostView(ViewSet):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ('id', 'user', 'content', 'image', 'item')
+        fields = ('id', 'user', 'body', 'image', 'item')
 
 
 

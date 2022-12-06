@@ -17,7 +17,7 @@ class CommentView(ViewSet):
         user = NeuroUser.objects.get(user=request.auth.user)
         post = Posts.objects.get(pk=request.data["post"])
         comment = Comments.objects.create(
-            user_id = user, 
+            user = user, 
             post = post,
             body = request.data["body"],
             
