@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from WhatsYourFixApi.views import PostView, CommentView, HobbieView
+from WhatsYourFixApi.views import PostView, CommentView, HobbieView, NeuroUserView
 from WhatsYourFixApi.views import register_user, login_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'hobbies', HobbieView, 'hobbie')
 router.register(r'posts', PostView, 'post')
 router.register(r'comments', CommentView, 'comment')
+router.register(r'users', NeuroUserView, 'user')
+
 urlpatterns = [
     path('login', login_user),
     path('register', register_user),
