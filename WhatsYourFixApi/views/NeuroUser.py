@@ -2,7 +2,8 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from WhatsYourFixApi.models import NeuroUser
+from WhatsYourFixApi.models import NeuroUser 
+from django.contrib.auth.models import User
 
 class NeuroUserView(ViewSet):
     
@@ -24,7 +25,8 @@ class NeuroUserView(ViewSet):
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+
 class NeuroUserSerializer(serializers.ModelSerializer):
     class Meta: 
         model = NeuroUser
-        fields = ('id', 'bio', 'hobbies',)
+        fields = ('id', 'full_name', 'bio', 'hobbies',)
