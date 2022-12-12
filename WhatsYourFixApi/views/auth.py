@@ -10,7 +10,7 @@ from WhatsYourFixApi.models import NeuroUser
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_user(request):
-    '''Handles the authentication of a gamer
+    '''Handles the authentication of a user
 
     Method arguments:
       request -- The full HTTP request object
@@ -55,6 +55,7 @@ def register_user(request):
 
     # Now save the extra info in the table
     new_user = NeuroUser.objects.create(
+        bio = request.data['bio'],
         user = neuro_user
     )
 

@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "username": "sesame123",
-            "password": "sesamestreet",
+            "password": "pbkdf2_sha256$216000$qMRH8szID7Z8$Vljya2V3XfruOHuvx1hGz9ZyKg4bxbw7rc2WO0gTR7I=",
             "first_name": "Shelby",
             "last_name": "Joiner"
         }

@@ -29,14 +29,14 @@ class PostView(ViewSet):
 
         new_post = Posts.objects.get(pk=pk)
         new_post.user = NeuroUser.objects.get(user=request.auth.user)
-        new_post.hobbie = Hobbies.objects.get(pk=request.data["hobbie"])
-        new_post.body = request.data["body"],
-        new_post.image = request.data["image"],
-        new_post.item = request.data["item"],
+        new_post.hobbies = Hobbies.objects.get(pk=request.data["hobbies"])
+        new_post.body = request.data["body"]
+        new_post.image = request.data["image"]
+        new_post.item = request.data["item"]
         new_post.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
-    def destroy(self, pk): 
+    def destroy(self, request, pk): 
 
         post = Posts.objects.get(pk=pk)
         post.delete()
