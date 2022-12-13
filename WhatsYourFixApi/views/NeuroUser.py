@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from WhatsYourFixApi.models import NeuroUser 
-from django.contrib.auth.models import User
+
 
 class NeuroUserView(ViewSet):
     
@@ -12,6 +12,7 @@ class NeuroUserView(ViewSet):
 
         serializer = NeuroUserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def retrieve(self, request, pk=None):
         user = NeuroUser.objects.get(pk=pk)
@@ -29,4 +30,4 @@ class NeuroUserView(ViewSet):
 class NeuroUserSerializer(serializers.ModelSerializer):
     class Meta: 
         model = NeuroUser
-        fields = ('id', 'full_name', 'bio', 'hobbies',)
+        fields = ('id', 'full_name', 'bio',)

@@ -14,14 +14,15 @@ class HobbieView(ViewSet):
 
     def create(self, request): 
 
-        new_hobbie = Hobbies()
-        new_hobbie.label = request.data['label']
+        new_hobbie = Hobbies.objects.create(
+            label = request.data["label"]
+        )
         new_hobbie.save()
         
-        serializer = HobbieSerializer(new_hobbie)
-        return Response(serializer.data)
+        serializer = HobbieSerializer(new_hobbie, many=False)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class HobbieSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Hobbies
-        fields = ('id', 'label')
+        fields = ('id', 'label',)

@@ -9,7 +9,16 @@ class PostView(ViewSet):
     def list(self, request): 
 
         posts = Posts.objects.all()
+        if 'user' in request.query_params:
+            posts = posts.filter(user_id = request.query_params['user'])
+
         serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, pk=None):
+        post = Posts.objects.get(pk=pk)
+        
+        serializer = PostSerializer(post, context={'request':request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request): 
@@ -47,7 +56,7 @@ class PostView(ViewSet):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ('id', 'user', 'body', 'image', 'item')
+        fields = ('id', 'user', 'hobbies', 'body', 'image', 'item')
 
 
 
