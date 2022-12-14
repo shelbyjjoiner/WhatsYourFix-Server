@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from WhatsYourFixApi.models import Posts, NeuroUser, Hobbies
 
-class PostView(ViewSet): 
+class PostView(ViewSet):
 
-    def list(self, request): 
+    def list(self, request):
 
         posts = Posts.objects.all()
         if 'user' in request.query_params:
@@ -17,15 +17,15 @@ class PostView(ViewSet):
 
     def retrieve(self, request, pk=None):
         post = Posts.objects.get(pk=pk)
-        
+
         serializer = PostSerializer(post, context={'request':request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def create(self, request): 
+    def create(self, request):
 
         new_post = Posts.objects.create(
             user = NeuroUser.objects.get(user=request.auth.user),
-            hobbies =Hobbies.objects.get(pk=request.data["hobbies"]),
+            hobbies =Hobbies.objects.get(pk=request.data['hobbies']),
             body = request.data["body"],
             image = request.data["image"],
             item = request.data["item"]
@@ -34,7 +34,7 @@ class PostView(ViewSet):
         serializer = PostSerializer(new_post)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk): 
+    def update(self, request, pk):
 
         new_post = Posts.objects.get(pk=pk)
         new_post.user = NeuroUser.objects.get(user=request.auth.user)
@@ -45,7 +45,7 @@ class PostView(ViewSet):
         new_post.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
-    def destroy(self, request, pk): 
+    def destroy(self, request, pk):
 
         post = Posts.objects.get(pk=pk)
         post.delete()

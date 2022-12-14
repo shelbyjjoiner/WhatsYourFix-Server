@@ -6,6 +6,12 @@ from WhatsYourFixApi.models import Hobbies
 
 class HobbieView(ViewSet):
 
+    def retrieve(self, request, pk=None):
+        hobby = Hobbies.objects.get()
+
+        serializer = HobbieSerializer(hobby,  context={'request':request})
+        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+
     def list(self, request):
 
         hobbies = Hobbies.objects.all()
@@ -21,6 +27,11 @@ class HobbieView(ViewSet):
         
         serializer = HobbieSerializer(new_hobbie, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def destroy(self, pk):
+        hobby = Hobbies.objects.get(pk=pk)
+        hobby.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class HobbieSerializer(serializers.ModelSerializer):
     class Meta: 
