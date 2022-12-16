@@ -2,6 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from django.contrib.auth.models import User
 from WhatsYourFixApi.models import NeuroUser, Posts
 from rest_framework.decorators import action
 
@@ -9,7 +10,10 @@ from rest_framework.decorators import action
 class NeuroUserView(ViewSet):
 
     def list(self, request):
-        users = NeuroUser.objects.all()
+        user = User.objects.get(pk=request.auth.user_id)
+        log_user = NeuroUser.objects.get(user=request.auth.user)
+        users = NeuroUser.objects.all().exclude(user_id=log_user.user_id)
+
 
         serializer = NeuroUserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -34,6 +38,8 @@ class NeuroUserView(ViewSet):
 
         serializer =NeuroUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 class NeuroUserPostSerializer(serializers.ModelSerializer):
     class Meta:
