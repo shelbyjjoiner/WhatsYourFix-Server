@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.contrib.auth.models import User
-from WhatsYourFixApi.models import NeuroUser, Posts
+from WhatsYourFixApi.models import NeuroUser, Posts, Hobbies
 from rest_framework.decorators import action
 
 
@@ -39,15 +39,20 @@ class NeuroUserView(ViewSet):
         serializer =NeuroUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
+class NeuroUserHobbieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hobbies
+        fields = ('id', 'label',)
 
 class NeuroUserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ('id', 'hobbies', 'body', 'image', 'item')
+        fields = ('id', 'hobbies', 'body', 'image', 'item',)
 
 class NeuroUserSerializer(serializers.ModelSerializer):
     posts = NeuroUserPostSerializer(many =True)
+    hobbies = NeuroUserHobbieSerializer(many =True)
     class Meta:
         model = NeuroUser
-        fields = ('id', 'full_name', 'bio', 'posts',)
+        fields = ('id', 'full_name', 'bio', 'posts', 'hobbies',)
+
